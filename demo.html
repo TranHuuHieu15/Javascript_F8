@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form với 2 ô input và label</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    form {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    input[type="text"], input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type="text"] {
+        width: calc(100% - 22px);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    .btn-group {
+        margin-top: 10px;
+    }
+
+    .btn-group button {
+        background-color: #f44336;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 10px 20px;
+        margin: 0 5px;
+        border-radius: 4px;
+    }
+
+    .btn-group button:hover {
+        background-color: #d32f2f;
+    }
+
+    .reset-btn {
+        background-color: #ff9800;
+    }
+
+    .reset-btn:hover {
+        background-color: #e68a00;
+    }
+</style>
+</head>
+<body>
+
+<form>
+    <label for="input1">Nhập dữ liệu cho ô input 1:</label>
+    <input type="text" id="input1" name="input1" placeholder="Nhập dữ liệu">
+
+    <label for="input2">Nhập dữ liệu cho ô input 2:</label>
+    <input type="text" id="input2" name="input2" placeholder="Nhập dữ liệu">
+
+    <div class="btn-group">
+        <button type="submit">Thêm</button>
+        <button type="button">Sửa</button>
+        <button type="button">Xóa</button>
+        <button type="reset" class="reset-btn">Reset</button>
+    </div>
+</form>
+
+</body>
+</html>
