@@ -109,3 +109,11 @@ html {
 .spacer {
     margin-top: 36px;
 }
+
+.flex_row {
+    display: flex;
+}
+
+.flex_row .space {
+    padding-left: 10px;
+}

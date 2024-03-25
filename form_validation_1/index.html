@@ -42,6 +42,37 @@
                     <span class="form-message"></span>
                 </div>
 
+                <div class="form-group">
+                    <label for="" class="form-label">Giới tính</label>
+                    <div class="flex_row">
+                        <div>
+                            <input type="checkbox" name="gender" value="Male" class="form-label" id="male">
+                            <label for="male" class="form-label">Nam</label>
+                        </div>
+                        <div class="space">
+                            <input type="checkbox" name="gender" value="Female" id="female">
+                            <label for="female" class="form-label">Nữ</label>
+                        </div>
+                        <div class="space">
+                            <input type="checkbox" name="gender" value="Other" id="other">
+                            <label for="other" class="form-label">Khác</label>
+                        </div>
+                    </div>
+                    <span class="form-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="province" class="form-label">Tỉnh thành</label>
+                    <select id="province" class="form-control">
+                        <option value="">-- Chọn Tỉnh/Thành phố --</option>
+                        <option value="Hà Nội">Hà Nội</option>
+                        <option value="Huế">Huế</option>
+                        <option value="Đà Nẵng">Đà Nẵng</option>
+                        <option value="HCM">Hồ Chí Minh</option>
+                    </select>
+                    <span class="form-message"></span>
+                </div>
+
                 <button class="form-submit">Đăng ký</button>
             </form>
 
@@ -51,6 +82,7 @@
         <script>
             Validator({
                 form: "#form-1",
+                formGroupSelector: ".form-group",
                 errorSelector: ".form-message",
                 rules: [
                     Validator.isRequired("#fullname",'Vui lòng nhập tên đầy đủ'),
@@ -58,14 +90,16 @@
                     Validator.isRequired("#password"),
                     Validator.minLength("#password", 6),
                     Validator.isRequired("#password_confirmation"),
+                    Validator.isRequired("#province"),
                     Validator.isConfirmed("#password_confirmation", function () {
                         return document.querySelector("#form-1 #password").value;
-                    }, "Mật khẩu nhập lại không chính xác")
+                    }, "Mật khẩu nhập lại không chính xác"),
+                    Validator.isRequired('input[name="gender"]')
                 ], 
-                // onSubmit: function(data) {
-                //     // call api
-                //     console.log(data);
-                // }
+                onSubmit: function(data) {
+                    // call api
+                    console.log(data);
+                }
             });
         </script>
     </body>
