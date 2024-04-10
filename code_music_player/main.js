@@ -14,27 +14,8 @@ const prevSong = $(".btn-prev");
 const randomBtn = $(".btn-random");
 const repeatBtn = $(".btn-repeat");
 const playlist = $(".playlist");
+const canvas = $("#canvas");
 
-const songs = [
-  {
-    name: "Âm thầm bên em",
-    singer: "Sơn Tùng M-TP",
-    path: "./access/music/AmThamBenEm-SonTungMTP-4066476.mp3",
-    image: "./access/img/am_tham_ben_em.jpg",
-  },
-  {
-    name: "Chúng ta rồi sẽ hạnh phúc",
-    singer: "Tama",
-    path: "./access/music/ChungTaRoiSeHanhPhucCover-Tama-13170356.mp3",
-    image: "./access/img/chung_ta_roi_se_hanh_phuc.jpg",
-  },
-  {
-    name: "Sau chia tay ai cũng khác",
-    singer: "TRI",
-    path: "./access/music/SauChiaTayAiCungKhac-TRI-6968722.mp3",
-    image: "./access/img/chung_ta_cua_hien_ta.jpg",
-  },
-];
 
 const app = {
   isRandom: false,
@@ -276,6 +257,147 @@ const app = {
     // Hiển thị trạng thái ban đầu của button repeat & random
     repeatBtn.classList.toggle("active", this.isRepeat);
     randomBtn.classList.toggle("active", this.isRandom);
+    
+    // Mảng chứa lời bài hát và thời gian tương ứng
+    var lyrics = [
+      { time: 0, text: "..." },
+      {
+        time: 16,
+        text: "Khi bên anh em thấy điều chi", 
+        key: [
+          { currentTime: 16.234, keyword: "Khi" },
+          { currentTime: 16.834, keyword: "bên" },
+          { currentTime: 17.434, keyword: "anh" },
+          { currentTime: 17.904, keyword: "em" },
+          { currentTime: 18.334, keyword: "thấy" },
+          { currentTime: 19.234, keyword: "chi" },
+        ]
+      },
+      {
+        time: 20, text: "Khi bên anh em thấy điều gì", 
+        key: [
+          { currentTime: 16.234, keyword: "Khi" },
+          { currentTime: 16.834, keyword: "bên" },
+          { currentTime: 17.434, keyword: "anh" },
+          { currentTime: 17.904, keyword: "em" },
+          { currentTime: 18.334, keyword: "thấy" },
+          { currentTime: 19.234, keyword: "gì" },
+        ]
+      },
+      {
+        time: 22, text: "Nước mắt rơi, gần kề làn mi", 
+        key: [
+          { currentTime: 22.000, keyword: "Nước" },
+          { currentTime: 22.500, keyword: "mắt" },
+          { currentTime: 23.434, keyword: "rơi," },
+          { currentTime: 24.404, keyword: "gần" },
+          { currentTime: 25.334, keyword: "kề" },
+          { currentTime: 26.234, keyword: "làn" },
+          { currentTime: 27.234, keyword: "mi" },
+        ]
+      },
+      {
+        time: 29, text: "chẳng còn những  giây phút", 
+        key: [
+          { currentTime: 29.234, keyword: "Khi" },
+          { currentTime: 29.834, keyword: "bên" },
+          { currentTime: 30.034, keyword: "anh" },
+          { currentTime: 30.504, keyword: "em" },
+          { currentTime: 31.134, keyword: "thấy" },
+          { currentTime: 31.734, keyword: "chi" },
+        ]
+      },
+      {
+        time: 32, text: "chẳng còn những  ân tình", 
+        key: [
+          { currentTime: 16.234, keyword: "Khi" },
+          { currentTime: 16.834, keyword: "bên" },
+          { currentTime: 17.434, keyword: "anh" },
+          { currentTime: 17.904, keyword: "em" },
+          { currentTime: 18.334, keyword: "thấy" },
+          { currentTime: 19.234, keyword: "chi" },
+        ]
+      },
+      {
+        time: 36, text: "Gió mang em rời xa nơi đây", 
+        key: [
+          { currentTime: 16.234, keyword: "Khi" },
+          { currentTime: 16.834, keyword: "bên" },
+          { currentTime: 17.434, keyword: "anh" },
+          { currentTime: 17.904, keyword: "em" },
+          { currentTime: 18.334, keyword: "thấy" },
+          { currentTime: 19.234, keyword: "chi" },
+        ]
+      },
+      {
+        time: 44, text: "Khi xa anh em nhớ về ai", 
+        key: [
+          { currentTime: 16.234, keyword: "Khi" },
+          { currentTime: 16.834, keyword: "bên" },
+          { currentTime: 17.434, keyword: "anh" },
+          { currentTime: 17.904, keyword: "em" },
+          { currentTime: 18.334, keyword: "thấy" },
+          { currentTime: 19.234, keyword: "chi" },
+        ]
+      },
+      {
+        time: 48, text: "Khi xa anh em nhớ một người", 
+        key: [
+          { currentTime: 16.234, keyword: "Khi" },
+          { currentTime: 16.834, keyword: "bên" },
+          { currentTime: 17.434, keyword: "anh" },
+          { currentTime: 17.904, keyword: "em" },
+          { currentTime: 18.334, keyword: "thấy" },
+          { currentTime: 19.234, keyword: "chi" },
+        ]
+      },
+      {
+        time: 50, text: " chắc không phải một người như anh", 
+        key: [
+          { currentTime: 16.234, keyword: "Khi" },
+          { currentTime: 16.834, keyword: "bên" },
+          { currentTime: 17.434, keyword: "anh" },
+          { currentTime: 17.904, keyword: "em" },
+          { currentTime: 18.334, keyword: "thấy" },
+          { currentTime: 19.234, keyword: "chi" },
+        ]
+      },
+    ];
+
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.font = "16px Arial";
+
+    //TODO: Hàm để vẽ lời bài hát lên canvas (Lyric hat tung hang)
+    function drawLyrics(time) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Xóa canvas trước khi vẽ
+      var currentLine = -1;
+      for (var i = 0; i < lyrics.length; i++) {
+        if (lyrics[i].time <= time) {
+          currentLine = i;
+        } else {
+          break;
+        }
+      }
+      if (currentLine != -1) {
+        ctx.textAlign = "center"; // Căn lề text ở giữa
+        ctx.textBaseline = "middle"; // Căn lề text ở giữa
+
+        // Vẽ 3 dòng lời bài hát
+        for (var j = Math.max(0, currentLine - 1); j <= Math.min(lyrics.length - 1, currentLine + 1); j++) {
+          var offsetY = canvas.height / 2 + (j - currentLine) * 20;
+          ctx.font = j === currentLine ? "bold 16px Arial" : "16px Arial";
+          ctx.fillStyle = j === currentLine ? "red" : "black";
+          ctx.fillText(lyrics[j].text, canvas.width / 2, offsetY);
+        }
+      }
+    }
+
+    // Sự kiện cập nhật lời bài hát khi thời gian nhạc thay đổi
+    audio.ontimeupdate = function () {
+      drawLyrics(this.currentTime);
+    };
+
   },
 };
 
