@@ -298,7 +298,7 @@ const app = {
     ctx.font = "17px Arial";
 
     function runTextAnimation(text) {
-      var x = 10;
+      var x = canvas.width / 2;
       var y = canvas.height / 2;
       var txt = text;
       var w = 0;
@@ -354,7 +354,7 @@ const app = {
         ctx.textBaseline = "middle"; // Căn lề text ở giữa
 
         // Vẽ 3 dòng lời bài hát
-        for (let j = Math.max(currentLine - 2, 0); j <= Math.min(currentLine + 2, lyrics.length - 1); j++) {
+        for (let j = Math.max(currentLine - 1, 0); j <= Math.min(currentLine + 1, lyrics.length - 1); j++) {
           let offsetY = canvas.height / 2 + (j - currentLine) * 20;
 
           if (j === currentLine) {
